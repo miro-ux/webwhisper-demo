@@ -1,6 +1,6 @@
 [build]
-  command = "npm install"
-  publish = "."
+  command = "npm install && npm start"
+  publish = "public"  # Create a public folder for static assets
   
 [template.environment]
   SITE_LOCATION = "Enter the path to your HTML files"
