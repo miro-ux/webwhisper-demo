@@ -2,12 +2,65 @@
 <html>
 
 <head>
-	<meta http-equiv="refresh" content="0;url=/.netlify/functions/server">
-	<title>Redirecting...</title>
+	<title>WebWhisper Demo</title>
+	<style>
+		body {
+			font-family: system-ui, sans-serif;
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 2rem;
+		}
+
+		.container {
+			border: 1px solid #ddd;
+			padding: 2rem;
+			border-radius: 8px;
+		}
+
+		.info {
+			background: #f5f5f5;
+			padding: 1rem;
+			border-radius: 4px;
+			margin-top: 1rem;
+		}
+
+		.note {
+			color: #666;
+			font-style: italic;
+		}
+	</style>
 </head>
 
 <body>
-	<p>Redirecting to WebWhisper Demo...</p>
+	<div class="container">
+		<h1>👋 WebWhisper Demo</h1>
+		<p>Loading configuration...</p>
+
+		<div class="info" id="config-info">
+			<!-- Configuration will be loaded here -->
+		</div>
+	</div>
+
+	<script>
+		// Fetch configuration from the API
+		fetch('/api/')
+			.then(response => response.json())
+			.then(data => {
+				document.querySelector('.container p').textContent = data.message;
+				document.getElementById('config-info').innerHTML = `
+          <h3>Configuration:</h3>
+          <p><strong>Site Location:</strong> ${data.config.siteLocation}</p>
+          <p><strong>API Key:</strong> ${data.config.apiKey}</p>
+        `;
+			})
+			.catch(error => {
+				document.getElementById('config-info').innerHTML = `
+          <h3>Error:</h3>
+          <p>Could not load configuration: ${error.message}</p>
+          <p>Try accessing <a href="/.netlify/functions/server">/.netlify/functions/server</a> directly.</p>
+        `;
+			});
+	</script>
 </body>
 
 </html>
