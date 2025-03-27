@@ -1,7 +1,8 @@
 [build]
   command = "npm install"
   publish = "public"
-  
+  functions = "netlify/functions"
+
 [template.environment]
   SITE_LOCATION = "Enter the path to your HTML files"
   API_KEY = "Enter your secret API key"
