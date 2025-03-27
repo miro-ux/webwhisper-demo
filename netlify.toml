@@ -1,9 +1,13 @@
 [build]
-  command = "npm install"
+  command = "echo Building Functions"
   publish = "public"
-  functions = "netlify/functions"
+  functions = "netlify"
+
+[functions]
+  node_bundler = "esbuild"
+  external_node_modules = ["express"]
 
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/server/:splat"
+  to = "/.netlify/functions/api/:splat"
   status = 200
