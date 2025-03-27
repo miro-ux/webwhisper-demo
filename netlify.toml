@@ -1,8 +1,10 @@
+# netlify.toml
 [build]
   command = "npm install"
   publish = "public"
   functions = "netlify/functions"
 
-[template.environment]
-  SITE_LOCATION = "Enter the path to your HTML files"
-  API_KEY = "Enter your secret API key"
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/server"
+  status = 200
