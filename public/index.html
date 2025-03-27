@@ -17,11 +17,20 @@
 			border-radius: 8px;
 		}
 
-		.info {
+		pre {
 			background: #f5f5f5;
 			padding: 1rem;
 			border-radius: 4px;
-			margin-top: 1rem;
+			overflow: auto;
+		}
+
+		button {
+			padding: 0.5rem 1rem;
+			background: #0066ff;
+			color: white;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
 		}
 	</style>
 </head>
@@ -29,14 +38,26 @@
 <body>
 	<div class="container">
 		<h1>👋 WebWhisper Demo</h1>
-		<p>Static HTML version</p>
-
-		<div class="info">
-			<h3>API Links:</h3>
-			<p><a href="/api/">/api/</a> - Should work through redirect</p>
-			<p><a href="/.netlify/functions/api/">/.netlify/functions/api/</a> - Direct function URL</p>
-		</div>
+		<p>Try the function:</p>
+		<button id="fetchBtn">Test Function</button>
+		<div id="result"></div>
 	</div>
+
+	<script>
+		const fetchBtn = document.getElementById('fetchBtn');
+		const result = document.getElementById('result');
+
+		fetchBtn.addEventListener('click', async () => {
+			try {
+				const response = await fetch('/.netlify/functions/hello-world');
+				const data = await response.json();
+
+				result.innerHTML = `<h3>Response:</h3><pre>${JSON.stringify(data, null, 2)}</pre>`;
+			} catch (error) {
+				result.innerHTML = `<h3>Error:</h3><pre>${error.message}</pre>`;
+			}
+		});
+	</script>
 </body>
 
 </html>

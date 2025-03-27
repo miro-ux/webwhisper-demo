@@ -1,13 +1,11 @@
 [build]
-  command = "echo Building Functions"
   publish = "public"
-  functions = "netlify"
+  functions = "netlify/functions"
 
 [functions]
   node_bundler = "esbuild"
-  external_node_modules = ["express"]
 
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/api/:splat"
+  to = "/.netlify/functions/:splat"
   status = 200
