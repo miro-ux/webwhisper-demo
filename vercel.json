@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "builds": [{ "src": "index.js", "use": "@vercel/node" }],
+  "routes": [{ "src": "/(.*)", "dest": "/index.js" }],
+  "env": {
+    "SITE_LOCATION": "Enter the path to your HTML files",
+    "API_KEY": "Enter your secret API key"
+  }
+}
