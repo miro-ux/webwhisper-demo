@@ -1,11 +1,14 @@
+// netlify/functions/server.js
 const express = require('express');
 const serverless = require('serverless-http');
 
 const app = express();
-const siteLocation = process.env.SITE_LOCATION || 'default-location';
-const apiKey = process.env.API_KEY || 'default-key';
 
-app.get('/', (req, res) => {
+// This is important - define the base path
+app.use('/.netlify/functions/server', (req, res) => {
+  const siteLocation = process.env.SITE_LOCATION || 'default-location';
+  const apiKey = process.env.API_KEY || 'default-key';
+  
   res.send(`
     <html>
       <head>
@@ -32,4 +35,5 @@ app.get('/', (req, res) => {
   `);
 });
 
+// Export the handler
 module.exports.handler = serverless(app);
